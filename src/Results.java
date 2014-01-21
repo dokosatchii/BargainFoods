@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
+import java.util.ListIterator;
 
 
 @SuppressWarnings("serial")
@@ -63,23 +64,29 @@ public class Results extends JFrame{
 	}//End of Constructor
 
 //Methods
-public void addToListB(DatabaseConnect database){
-	for(String recipe: database.breakfastArrayItems()){
-		dlistmodelb.addElement(recipe);
-	}
-}
-
-public void addToListL(DatabaseConnect database){
-		for(String recipe: database.lunchArrayItems()){
-			dlistmodell.addElement(recipe);
+public void addToListB(HibernateConnect database){
+		ListIterator<Breakfast> counter = database.getBreakfastRecipes().listIterator();
+		while(counter.hasNext()){
+			dlistmodelb.addElement(counter.next().getRecipeName());
 		}
+
+}
+public void addToListL(HibernateConnect database){
+	ListIterator<Lunch> counter = database.getLunchRecipes().listIterator();
+	while(counter.hasNext()){
+		dlistmodell.addElement(counter.next().getRecipeName());
+	}
+
+}
+public void addToListD(HibernateConnect database){
+	ListIterator<Dinner> counter = database.getDinnerRecipes().listIterator();
+	while(counter.hasNext()){
+		dlistmodeld.addElement(counter.next().getRecipeName());
+	}
+
 }
 
-public void addToListD(DatabaseConnect database){
-			for(String recipe: database.dinnerArrayItems()){
-				dlistmodeld.addElement(recipe);
-			}
-}
+
 
 public void removeLists(boolean breakfast, boolean lunch, boolean dinner) {
 	if(!breakfast) {

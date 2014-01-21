@@ -4,7 +4,7 @@ public class MainResultsController {
 
 	private Main mainView;
 	private Results resultsView;
-	private DatabaseConnect db = new DatabaseConnect();
+	private HibernateConnect db = new HibernateConnect();
 
 	public MainResultsController(Main mainView, Results resultsView) {
 		this.mainView = mainView;
