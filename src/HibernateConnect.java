@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.HibernateException;
@@ -37,7 +36,7 @@ public HibernateConnect() {
 	}
 	
 	
-	public static Session getSession() {
+	private static Session getSession() {
 		
 		Configuration config = new Configuration().configure();
 		StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder();
@@ -48,7 +47,7 @@ public HibernateConnect() {
 		return session;
 	}
 	
-	public static void closeSession(Session sess){
+	private static void closeSession(Session sess){
 		if(sess!=null){
 			try {
 				sess.close();
@@ -112,7 +111,22 @@ public HibernateConnect() {
 		}
 		return null;
 	}
-		
+
+	public void setIngredientCost(String name) { 
+		Session sess = null;
+		try{
+			sess = getSession();
+			Query qry = sess.getNamedQuery("updateIngredients");
+			qry.setString("fName", name);
+			
+		}
+		catch(HibernateException e){
+			e.printStackTrace();
+		}
+		finally{
+			HibernateConnect.closeSession(sess);
+		}
+	}
 		
 	
 }//End of Code

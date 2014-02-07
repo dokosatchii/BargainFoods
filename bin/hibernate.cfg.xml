@@ -52,6 +52,7 @@
         <mapping class="Breakfast"/>
         <mapping class="Lunch"/>
         <mapping class="Dinner"/>
+        <mapping class="IngredientsCost"/>
 
     </session-factory>
 
